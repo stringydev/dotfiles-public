@@ -1,0 +1,17 @@
+[user]
+  name = The Great Gravitist
+	email = 107803920+thegreatgravitist@users.noreply.github.com. 
+[core]
+  excludesfile = ~/.gitignore_global
+  editor = nvim
+[ghq]
+  root = ~/Developer/Repos/
+[hub]
+  protocol = https
+[github]
+  user = thegreatgravitist
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
