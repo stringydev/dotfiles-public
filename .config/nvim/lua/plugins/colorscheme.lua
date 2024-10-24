@@ -1,15 +1,34 @@
 return {
-  "folke/tokyonight.nvim",
-  priority = 1000,
-  config = function()
-    require("tokyonight").setup({
-      transparent = true,
-      styles = {
-        sidebars = "transparent",
-        floats = "transparent",
-      },
-    })
-    -- load the colorscheme here
-    vim.cmd([[colorscheme tokyonight-moon]])
-  end,
+  --
+  -- -- Tokyonight
+  -- {
+  --   "folke/tokyonight.nvim",
+  --   priority = 1000,
+  --   config = function()
+  --     require("tokyonight").setup({
+  --       transparent = true,
+  --       styles = {
+  --         sidebars = "transparent",
+  --         floats = "transparent",
+  --       },
+  --     })
+  --     vim.cmd([[colorscheme tokyonight-moon]])
+  --   end,
+  -- },
+
+  -- Solarized Osaka
+  {
+    "craftzdog/solarized-osaka.nvim",
+    priority = 1000,
+    config = function()
+      require("solarized-osaka").setup({
+        transparent = true,
+        styles = {
+          sidebars = "transparent",
+          floats = "transparent",
+        },
+      })
+      vim.cmd([[colorscheme solarized-osaka]])
+    end,
+  },
 }
