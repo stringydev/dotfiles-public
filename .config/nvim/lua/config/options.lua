@@ -31,8 +31,8 @@ vim.opt.smartcase = true
 
 vim.opt.cursorline = true
 
-vim.opt.termguicolors = true
-
+-- vim.opt.termguicolors = true
+vim.opt.shell = "fish"
 vim.opt.backspace = "indent,eol,start"
 
 vim.opt.clipboard:append("unnamedplus")
