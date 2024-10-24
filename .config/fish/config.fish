@@ -30,5 +30,14 @@ set fzf_directory_opts --bind "ctrl-o:execute($EDITOR {} &> /dev/tty)"
 bind \cn fzf_change_directory
 
 # pyenv
+set -Ux PYENV_ROOT "$HOME/Developer/.pyenv"
 pyenv init - | source
 
+function removepath
+    if set -l index (contains -i $argv[1] $PATH)
+        set --erase --universal fish_user_paths[$index]
+        echo "Updated PATH: $PATH"
+    else
+        echo "$argv[1] not found in PATH: $PATH"
+    end
+end
