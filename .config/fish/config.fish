@@ -32,7 +32,7 @@ fzf_configure_bindings --directory=\cf
 set fzf_directory_opts --bind "ctrl-o:execute($EDITOR {} &> /dev/tty)"
 bind \cn fzf_change_directory
 
-# pyenv
+# Pyenv root path
 set -Ux PYENV_ROOT "$HOME/Developer/.pyenv"
 pyenv init - | source
 
@@ -45,3 +45,9 @@ function removepath
         echo "$argv[1] not found in PATH: $PATH"
     end
 end
+
+# Created by `pipx` on 2024-10-24 16:10:40
+set PATH $PATH /Users/ttoe/.local/bin
+
+# Poetry config file path
+set -Ux POETRY_CONFIG_DIR $HOME/.config/pypoetry/
