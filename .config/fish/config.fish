@@ -41,3 +41,4 @@ pyenv init - | source  # Initialize Pyenv
 
 # Poetry configuration
 set -Ux POETRY_CONFIG_DIR $HOME/.config/pypoetry/  # Set the Poetry config file path
+

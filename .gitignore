@@ -59,7 +59,6 @@ fishd.*
 
 # Fish Shell Configuration
 .config/fish/fish_variables  
-.config/fish/completions/*  
 .config/fish/conf.d/*  
 .config/fish/tide/*  
 .config/fish/functions/_*  
