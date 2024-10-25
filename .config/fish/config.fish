@@ -40,5 +40,10 @@ set -Ux PYENV_ROOT "$HOME/Developer/.pyenv"  # Set Pyenv root path
 pyenv init - | source  # Initialize Pyenv
 
 # Poetry configuration
+if status is-login
+    contains ~/.local/bin $PATH
+    or set PATH ~/.local/bin $PATH
+end
+
 set -Ux POETRY_CONFIG_DIR $HOME/.config/pypoetry/  # Set the Poetry config file path
 
