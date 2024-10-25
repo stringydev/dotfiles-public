@@ -1,6 +1,6 @@
 [user]
-  name = The Great Gravitist
-	email = 107803920+thegreatgravitist@users.noreply.github.com. 
+  name = GravDev
+  email = 107803920+thegravdev@users.noreply.github.com.
 [core]
   excludesfile = ~/.gitignore_global
   editor = nvim
@@ -9,7 +9,7 @@
 [hub]
   protocol = https
 [github]
-  user = thegreatgravitist
+  user = thegravdev
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
