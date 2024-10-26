@@ -1,5 +1,5 @@
 return {
-  { "neovim/nvim-lspconfig" }, -- LSP configurations
+  "neovim/nvim-lspconfig", -- LSP configurations
   dependencies = {
     { "williamboman/mason.nvim" }, -- Installer for external tools
     { "williamboman/mason-lspconfig.nvim" }, -- mason extension for lspconfig
@@ -62,7 +62,7 @@ return {
     require("mason-lspconfig").setup({
       ensure_installed = {
         "lua_ls",
-        "pyright",
+        "pyright@1.1.383",
         "ruff",
       },
       handlers = {
