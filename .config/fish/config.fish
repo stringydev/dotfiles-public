@@ -1,6 +1,7 @@
 # Check if the shell is interactive
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+# and not set -q TMUX
+#   tmux new-session -A main
 end
 
 # Basic settings
@@ -31,7 +32,7 @@ set -gx EDITOR nvim  # Use nvim as the default editor
 bind \cx reload_fish  # Reload the fish configuration with Ctrl + x
 
 # Fzf configuration
-fzf_configure_bindings --directory=\cf  # Set fzf to change directories with Ctrl + f
+fzf_configure_bindings # Set fzf to change directories with Ctrl + f
 set fzf_directory_opts --bind "ctrl-o:execute($EDITOR {} &> /dev/tty)"  # Open selected file in editor
 bind \cn fzf_change_directory  # Change directory using fzf with Ctrl + n
 
@@ -47,3 +48,9 @@ end
 
 set -Ux POETRY_CONFIG_DIR $HOME/.config/pypoetry/  # Set the Poetry config file path
 
+# tmux sessionizer
+set PATH "$PATH":"$HOME/.scripts/"
+bind \cf "tmux-sessionizer"
+#!/usr/bin/env fish
+# set session_name (tmux list-session |sed 's/:.*//g'| fzf)
+# tmux switch-client -t "$session_name"

@@ -87,12 +87,6 @@
                         "product_id": 2907,
                         "vendor_id": 3504
                     },
-                    "simple_modifications": [
-                        {
-                            "from": { "key_code": "left_command" },
-                            "to": [{ "key_code": "vk_none" }]
-                        }
-                    ],
                     "treat_as_built_in_keyboard": true
                 },
                 {
@@ -102,13 +96,7 @@
                         "product_id": 2907,
                         "vendor_id": 3504
                     },
-                    "ignore": false,
-                    "simple_modifications": [
-                        {
-                            "from": { "key_code": "left_command" },
-                            "to": [{ "key_code": "vk_none" }]
-                        }
-                    ]
+                    "ignore": false
                 },
                 {
                     "identifiers": {

@@ -31,6 +31,9 @@ return {
         sorting_strategy = "ascending",
         wrap_results = true,
         winblend = 0,
+        defaults = {
+          cwd = vim.fn.expand("~/.config/nvim"),
+        },
       })
 
       telescope.load_extension("fzf")
