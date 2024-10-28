@@ -5,7 +5,6 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      "nvim-telescope/telescope-file-browser.nvim",
       "nvim-tree/nvim-web-devicons",
       "folke/todo-comments.nvim",
     },
@@ -15,7 +14,6 @@ return {
       { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files (Root Dir)" },
       { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find files (git-files)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent files" },
-      { "<leader>fb", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", desc = "File Browser" },
       -- search
       { "<leader>/", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
       { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
@@ -24,39 +22,18 @@ return {
       { "<leader>sq", "<cmd>Telescope quickfix<cr>", desc = "Quickfix List" },
       { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
     },
-    config = function(_, opts)
+    config = function()
       local telescope = require("telescope")
-      local fb_actions = telescope.extensions.file_browser.actions
 
-      opts.defaults = {
+      telescope.setup({
         layout_strategy = "horizontal",
         layout_config = { prompt_position = "top" },
         sorting_strategy = "ascending",
         wrap_results = true,
         winblend = 0,
-      }
+      })
 
-      opts.extensions = {
-        file_browser = {
-          theme = "dropdown",
-          hijack_netrw = true,
-          respect_gitignore = false,
-          hidden = true,
-          grouped = true,
-          previewer = false,
-          initial_mode = "normal",
-          mappings = {
-            ["n"] = {
-              ["-"] = fb_actions.goto_parent_dir,
-              ["n"] = fb_actions.create,
-            },
-          },
-        },
-      }
-
-      telescope.setup(opts)
-      require("telescope").load_extension("fzf")
-      require("telescope").load_extension("file_browser")
+      telescope.load_extension("fzf")
     end,
   },
 

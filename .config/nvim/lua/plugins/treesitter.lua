@@ -2,7 +2,6 @@ return {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    "nvim-treesitter/nvim-treesitter-context",
   },
   build = ":TSUpdate",
   event = { "BufReadPre", "BufNewFile" },
@@ -51,10 +50,5 @@ return {
   },
   config = function(_, opts)
     require("nvim-treesitter.configs").setup(opts)
-    require("treesitter-context").setup({
-      enable = true,
-      max_lines = 3,
-      mode = "cursor",
-    })
   end,
 }

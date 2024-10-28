@@ -9,7 +9,7 @@ set -gx TERM xterm-256color  # Set terminal type for color support
 
 # Theme configuration
 # Choose a theme for the shell prompt
-fish_config theme choose "Rosé Pine"
+fish_config theme choose "Solarized Dark"
 set -g fish_prompt_pwd_dir_length 1  # Set the length of the current directory in prompt
 set -g theme_display_user yes  # Display the user in the prompt
 set -g theme_hide_hostname no  # Always show hostname in the prompt

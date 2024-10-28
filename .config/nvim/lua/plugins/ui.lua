@@ -1,23 +1,5 @@
 return {
-  -- -- Buffer line
-  -- {
-  --   "akinsho/bufferline.nvim",
-  --   event = "VeryLazy",
-  --   keys = {
-  --     { "<Tab>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
-  --     { "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Prev tab" },
-  --   },
-  --   opts = {
-  --     options = {
-  --       mode = "tabs",
-  --       -- separator_style = "slant",
-  --       show_buffer_close_icons = false,
-  --       show_close_icon = false,
-  --     },
-  --   },
-  -- },
-  --
-  -- -- statusline
+  -- statusline
   {
     "nvim-lualine/lualine.nvim",
     dependencies = {
@@ -27,14 +9,22 @@ return {
     config = function()
       local lualine = require("lualine")
       local lazy_status = require("lazy.status") -- to configure lazy pending updates count
-      local icons = require("util.icons")
 
       lualine.setup({
+        options = {
+          icons_enabled = true,
+          section_separators = { left = "", right = "" },
+          component_separators = { left = "", right = "" },
+          disabled_filetypes = {},
+        },
         sections = {
           lualine_a = { "mode" },
           lualine_b = { "branch" },
           lualine_c = {
-            { "pretty_path" },
+            {
+              "pretty_path",
+              file_status = true, -- displays file status (readonly status, modified status)
+            },
           },
           lualine_x = {
             {
@@ -45,21 +35,10 @@ return {
             {
               "diagnostics",
               sources = { "nvim_diagnostic" },
-              symbols = {
-                error = icons.diagnostics.Error,
-                warn = icons.diagnostics.Warn,
-                info = icons.diagnostics.Info,
-                hint = icons.diagnostics.Hint,
-              },
+              -- symbols = { error = " ", warn = " ", info = " ", hint = " " },
             },
             {
               "diff",
-              symbols = {
-                added = icons.git.added,
-                modified = icons.git.modified,
-                removed = icons.git.removed,
-              },
-
               source = function()
                 local gitsigns = vim.b.gitsigns_status_dict
                 if gitsigns then
@@ -72,20 +51,23 @@ return {
               end,
             },
           },
-          lualine_y = {
-            { "progress", separator = " ", padding = { left = 1, right = 0 } },
-            { "location", padding = { left = 0, right = 1 } },
-          },
-          lualine_z = {
-            function()
-              return " " .. os.date("%R")
-            end,
-          },
+          lualine_y = { "progress" },
+          lualine_z = { "location" },
         },
-
         inactive_sections = {
-          lualine_c = { "pretty_path" },
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {
+            {
+              "pretty_path",
+              file_status = true, -- displays file status (readonly status, modified status)
+            },
+          },
+          lualine_x = { "location" },
+          lualine_y = {},
+          lualine_z = {},
         },
+        tabline = {},
       })
     end,
   },
@@ -94,12 +76,6 @@ return {
   {
     "stevearc/dressing.nvim",
     event = "VeryLazy",
-  },
-
-  -- notifications
-  {
-    "vigoux/notifier.nvim",
-    opts = {},
   },
 
   -- dashboard
@@ -131,5 +107,38 @@ return {
       -- Disable folding on alpha buffer
       vim.cmd([[autocmd FileType alpha setlocal nofoldenable]])
     end,
+  },
+
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      presets = { lsp_doc_border = true },
+      lsp = {
+        override = {
+          -- Override UI elements specifically for LSP
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+      },
+      -- Disable all other features in Noice
+      cmdline = { enabled = false },
+      messages = { enabled = false },
+      popupmenu = { enabled = false },
+      notify = { enabled = false },
+    },
+    dependencies = { "MunifTanjim/nui.nvim" },
+  },
+
+  {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    opts = {},
   },
 }
