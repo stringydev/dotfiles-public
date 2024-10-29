@@ -1,3 +1,5 @@
+vim.cmd("let g:netrw_liststyle = 3")
+
 vim.g.mapleader = " "
 vim.opt.encoding = "utf-8"
 
@@ -22,7 +24,6 @@ vim.opt.incsearch = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 
--- vim.opt.showcmd = true
 vim.opt.cmdheight = 1
 vim.opt.laststatus = 3
 vim.opt.showcmd = false
@@ -31,7 +32,7 @@ vim.opt.smartcase = true
 
 vim.opt.cursorline = true
 
--- vim.opt.termguicolors = true
+vim.opt.termguicolors = true
 vim.opt.shell = "fish"
 vim.opt.backspace = "indent,eol,start"
 
@@ -40,8 +41,6 @@ vim.opt.clipboard:append("unnamedplus")
 vim.opt.splitbelow = true -- Put new windows below current
 vim.opt.splitright = true -- Put new windows right of current
 vim.opt.mouse = ""
-
-vim.opt.shell = "fish"
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])

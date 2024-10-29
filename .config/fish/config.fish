@@ -1,12 +1,5 @@
-# Check if the shell is interactive
-if status is-interactive
-# and not set -q TMUX
-#   tmux new-session -A main
-end
-
 # Basic settings
 set fish_greeting ""  # Disable the default fish greeting
-set -gx TERM xterm-256color  # Set terminal type for color support
 
 # Theme configuration
 # Choose a theme for the shell prompt
