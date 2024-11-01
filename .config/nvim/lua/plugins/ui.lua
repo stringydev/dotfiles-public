@@ -12,6 +12,7 @@ return {
 
       lualine.setup({
         options = {
+          theme = "tokyonight",
           icons_enabled = true,
           section_separators = { left = "", right = "" },
           component_separators = { left = "", right = "" },
@@ -139,6 +140,8 @@ return {
       "SmiteshP/nvim-navic",
       "nvim-tree/nvim-web-devicons", -- optional dependency
     },
-    opts = {},
+    opts = {
+      theme = "tokyonight",
+    },
   },
 }

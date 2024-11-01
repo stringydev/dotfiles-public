@@ -2,8 +2,7 @@
 set fish_greeting ""  # Disable the default fish greeting
 
 # Theme configuration
-# Choose a theme for the shell prompt
-fish_config theme choose "Solarized Dark"
+fish_config theme choose "TokyoNight Night"
 set -g fish_prompt_pwd_dir_length 1  # Set the length of the current directory in prompt
 set -g theme_display_user yes  # Display the user in the prompt
 set -g theme_hide_hostname no  # Always show hostname in the prompt
@@ -18,6 +17,8 @@ if type -q eza
     alias lla "ll -a"  # Show all files with eza
 end
 
+starship init fish | source
+
 # Set the default editor
 set -gx EDITOR nvim  # Use nvim as the default editor
 
@@ -25,9 +26,7 @@ set -gx EDITOR nvim  # Use nvim as the default editor
 bind \cx reload_fish  # Reload the fish configuration with Ctrl + x
 
 # Fzf configuration
-fzf_configure_bindings # Set fzf to change directories with Ctrl + f
 set fzf_directory_opts --bind "ctrl-o:execute($EDITOR {} &> /dev/tty)"  # Open selected file in editor
-bind \cn fzf_change_directory  # Change directory using fzf with Ctrl + n
 
 # Pyenv configuration
 set -Ux PYENV_ROOT "$HOME/Developer/.pyenv"  # Set Pyenv root path

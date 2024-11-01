@@ -1,16 +1,16 @@
 return {
-  "neovim/nvim-lspconfig", -- LSP configurations
+  "neovim/nvim-lspconfig",                                    -- LSP configurations
   dependencies = {
-    { "williamboman/mason.nvim" }, -- Installer for external tools
-    { "williamboman/mason-lspconfig.nvim" }, -- mason extension for lspconfig
-    { "hrsh7th/nvim-cmp" }, -- Autocomplete engine
-    { "hrsh7th/cmp-nvim-lsp" }, -- Completion source for LSP
-    { "hrsh7th/cmp-buffer" }, -- Completion source for text in buffer
-    { "hrsh7th/cmp-path" }, -- Completion source for file system paths
-    { "L3MON4D3/LuaSnip", version = "v2.*" }, -- Snippet engine
-    { "saadparwaiz1/cmp_luasnip" }, -- Completion source for snippets
-    { "rafamadriz/friendly-snippets" }, -- Useful snippets
-    { "onsails/lspkind.nvim" }, -- VS-code like pictograms
+    { "williamboman/mason.nvim" },                            -- Installer for external tools
+    { "williamboman/mason-lspconfig.nvim" },                  -- mason extension for lspconfig
+    { "hrsh7th/nvim-cmp" },                                   -- Autocomplete engine
+    { "hrsh7th/cmp-nvim-lsp" },                               -- Completion source for LSP
+    { "hrsh7th/cmp-buffer" },                                 -- Completion source for text in buffer
+    { "hrsh7th/cmp-path" },                                   -- Completion source for file system paths
+    { "L3MON4D3/LuaSnip",                 version = "v2.*" }, -- Snippet engine
+    { "saadparwaiz1/cmp_luasnip" },                           -- Completion source for snippets
+    { "rafamadriz/friendly-snippets" },                       -- Useful snippets
+    { "onsails/lspkind.nvim" },                               -- VS-code like pictograms
   },
 
   config = function()
@@ -35,7 +35,7 @@ return {
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-        ["<C-e>"] = cmp.mapping.abort(), -- close completion window
+        ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
       }),
       snippet = {
@@ -54,7 +54,7 @@ return {
             menu = function()
               return math.floor(0.45 * vim.o.columns)
             end,
-            abbr = 50, -- actual suggestion item
+            abbr = 50,           -- actual suggestion item
           },
           ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
         }),
@@ -79,7 +79,7 @@ return {
         bufmap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
         bufmap("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
         bufmap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>")
-        -- bufmap({'n', 'x'}, '<F4>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
+        bufmap({ 'n', 'x' }, 'gf', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
         bufmap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>")
         bufmap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
         bufmap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
