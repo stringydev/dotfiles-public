@@ -31,8 +31,11 @@ return {
         sorting_strategy = "ascending",
         wrap_results = true,
         winblend = 0,
-        defaults = {
-          cwd = vim.fn.expand("~/.config/nvim"),
+        pickers = {
+          find_files = {
+            -- hidden = true,
+            no_ignore = true,
+          },
         },
       })
 
