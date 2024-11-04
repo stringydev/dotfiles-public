@@ -1,6 +1,6 @@
 [user]
-  name = GravDev
-  email = 107803920+thegravdev@users.noreply.github.com.
+  name = StringyDev
+  email = 107803920+stringydev@users.noreply.github.com 
 [core]
   excludesfile = ~/.gitignore_global
   editor = nvim
@@ -9,7 +9,7 @@
 [hub]
   protocol = https
 [github]
-  user = thegravdev
+  user = stringydev
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
