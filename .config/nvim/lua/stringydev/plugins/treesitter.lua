@@ -17,6 +17,7 @@ return {
       "markdown_inline",
       "python",
       "toml",
+      "cpp",
     },
     incremental_selection = {
       enable = true,

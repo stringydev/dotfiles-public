@@ -1,18 +1,17 @@
 return {
-  "neovim/nvim-lspconfig",                                    -- LSP configurations
+  "neovim/nvim-lspconfig", -- LSP configurations
   dependencies = {
-    { "williamboman/mason.nvim" },                            -- Installer for external tools
-    { "williamboman/mason-lspconfig.nvim" },                  -- mason extension for lspconfig
-    { "hrsh7th/nvim-cmp" },                                   -- Autocomplete engine
-    { "hrsh7th/cmp-nvim-lsp" },                               -- Completion source for LSP
-    { "hrsh7th/cmp-buffer" },                                 -- Completion source for text in buffer
-    { "hrsh7th/cmp-path" },                                   -- Completion source for file system paths
-    { "L3MON4D3/LuaSnip",                 version = "v2.*" }, -- Snippet engine
-    { "saadparwaiz1/cmp_luasnip" },                           -- Completion source for snippets
-    { "rafamadriz/friendly-snippets" },                       -- Useful snippets
-    { "onsails/lspkind.nvim" },                               -- VS-code like pictograms
+    { "williamboman/mason.nvim" }, -- Installer for external tools
+    { "williamboman/mason-lspconfig.nvim" }, -- mason extension for lspconfig
+    { "hrsh7th/nvim-cmp" }, -- Autocomplete engine
+    { "hrsh7th/cmp-nvim-lsp" }, -- Completion source for LSP
+    { "hrsh7th/cmp-buffer" }, -- Completion source for text in buffer
+    { "hrsh7th/cmp-path" }, -- Completion source for file system paths
+    { "L3MON4D3/LuaSnip", version = "v2.*" }, -- Snippet engine
+    { "saadparwaiz1/cmp_luasnip" }, -- Completion source for snippets
+    { "rafamadriz/friendly-snippets" }, -- Useful snippets
+    { "onsails/lspkind.nvim" }, -- VS-code like pictograms
   },
-
   config = function()
     -- Setup autocomplete and snippet engines
     local cmp = require("cmp")
@@ -23,19 +22,22 @@ return {
     require("luasnip.loaders.from_vscode").lazy_load()
 
     cmp.setup({
+      completion = {
+        completeopt = "menu,menuone,preview,noselect",
+      },
       sources = {
-        { name = "buffer" },
-        { name = "path" },
-        { name = "luasnip" },
-        { name = "nvim_lsp" },
+        { name = "nvim_lsp" }, -- LSP completions first for language-specific suggestions
+        { name = "luasnip" }, -- Snippets are useful after language-specific completions
+        { name = "buffer" }, -- Buffer completions (local text in the file)
+        { name = "path" }, -- Path completions (typically last, for file path suggestions)
       },
       mapping = cmp.mapping.preset.insert({
-        ["<C-p>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-        ["<C-n>"] = cmp.mapping.select_next_item(), -- next suggestion
+        ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+        ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
         ["<C-u>"] = cmp.mapping.scroll_docs(-4),
         ["<C-d>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-        ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
+        ["<C-e>"] = cmp.mapping.abort(), -- close completion window
         ["<CR>"] = cmp.mapping.confirm({ select = false }),
       }),
       snippet = {
@@ -43,10 +45,7 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
-      -- window = {
-      --   completion = cmp.config.window.bordered(),
-      --   documentation = cmp.config.window.bordered(),
-      -- },
+
       formatting = {
         format = lspkind.cmp_format({
           mode = "symbol",
@@ -54,7 +53,7 @@ return {
             menu = function()
               return math.floor(0.45 * vim.o.columns)
             end,
-            abbr = 50,           -- actual suggestion item
+            abbr = 50, -- actual suggestion item
           },
           ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
         }),
@@ -79,7 +78,7 @@ return {
         bufmap("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
         bufmap("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
         bufmap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<cr>")
-        bufmap({ 'n', 'x' }, 'gf', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
+        bufmap({ "n", "x" }, "gf", "<cmd>lua vim.lsp.buf.format({async = true})<cr>")
         bufmap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>")
         bufmap("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
         bufmap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
@@ -90,12 +89,19 @@ return {
     local lspconfig = require("lspconfig")
     local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+    local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+    for type, icon in pairs(signs) do
+      local hl = "DiagnosticSign" .. type
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+    end
+
     require("mason").setup({})
     require("mason-lspconfig").setup({
       ensure_installed = {
         "lua_ls",
         "pyright",
         "ruff",
+        "clangd",
       },
       handlers = {
         function(server)
@@ -123,13 +129,13 @@ return {
                 -- Using Ruff's import organizer
                 disableOrganizeImports = true,
               },
-              -- python = {
-              --   analysis = {
-              --     -- Ignore all files for analysis to exclusively use Ruff for linting
-              --     ignore = { "*" },
-            } --[[  ]],
-            -- },
-            -- },
+              python = {
+                analysis = {
+                  -- Ignore all files for analysis to exclusively use Ruff for linting
+                  ignore = { "*" },
+                },
+              },
+            },
           })
         end,
         ["ruff"] = function()
