@@ -1,2 +1,2 @@
-require("stringydev.lazy")
 require("stringydev.config")
+require("stringydev.lazy")
